@@ -113,26 +113,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="TextureLoader.cpp" />
     <QtRcc Include="OpenGLApp.qrc" />
     <QtUic Include="OpenGLApp.ui" />
-    <ClCompile Include="glwidget.cpp" />
-    <ClCompile Include="mainwindow.cpp" />
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="glwidget.h" />
+    <QtMoc Include="source\TextureLoader.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="mainwindow.h" />
+    <ClCompile Include="source\Camera.cpp" />
+    <ClCompile Include="source\glwidget.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\mainwindow.cpp" />
+    <ClCompile Include="source\TextureLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <QtMoc Include="Model.h" />
-    <QtMoc Include="Shader.h" />
-    <ClInclude Include="stb_image.h" />
-    <QtMoc Include="TextureLoader.h" />
+    <ClInclude Include="source\Camera.h" />
+    <ClInclude Include="source\Log.h" />
+    <ClInclude Include="source\stb_image.h" />
+    <QtMoc Include="source\Shader.h" />
+    <QtMoc Include="source\Model.h" />
+    <QtMoc Include="source\mainwindow.h" />
+    <QtMoc Include="source\glwidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
