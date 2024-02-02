@@ -2,7 +2,6 @@
 #define CAMERA_H
 
 #include <iostream>
-
 #include <glm/glm.hpp>
 
 using glm::vec2;
@@ -10,7 +9,8 @@ using glm::vec3;
 using glm::vec4;
 using glm::mat4;
 
-class Camera {
+class Camera 
+{
 private:
 	float distance, distanceVelocity;
 	vec2 panPosition, panVelocity;
@@ -25,6 +25,7 @@ public: // for current camera (main camera)
 	vec2 mousePos;
 	float attenuation;
 	bool draggingLeft, draggingMiddle, draggingRight;
+
 public:
 	Camera() :
 		distance(0.0f),

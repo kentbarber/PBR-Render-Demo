@@ -1,15 +1,14 @@
 #ifndef SHADER_H
 #define SHADER_H
 #include <QObject>
-#include <QtGui/QOpenGLFunctions_4_1_Core>
-#include <QtOpenGLExtensions/QOpenGLExtensions>
-#include<glm\gtc\type_ptr.hpp>
-#include<string>
-#include<sstream>
-#include<fstream>
-#include<iostream>
-#include<vector>
-using namespace std;
+#include <QOpenGLFunctions_4_1_Core>
+//#include <QtOpenGLExtensions/QOpenGLExtensions>
+#include <glm\gtc\type_ptr.hpp>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <iostream>
+#include <vector>
 class Shader : public QObject, protected QOpenGLFunctions_4_1_Core
 {
 	Q_OBJECT
@@ -83,16 +82,16 @@ public:
 	}
 private:
 	GLuint LoadShaders(const char * vertex_shader_path, const char * frag_shader_path) {
-		string vertexCode;
-		string fragCode;
-		ifstream vertexFile, fragFile;
-		vertexFile.exceptions(ifstream::failbit | ifstream::badbit);
-		fragFile.exceptions(ifstream::failbit | ifstream::badbit);
+		std::string vertexCode;
+		std::string fragCode;
+		std::ifstream vertexFile, fragFile;
+		vertexFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		fragFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		try
 		{
 			vertexFile.open(vertex_shader_path);
 			fragFile.open(frag_shader_path);
-			stringstream vertexStream, fragStream;
+			std::stringstream vertexStream, fragStream;
 			vertexStream << vertexFile.rdbuf();
 			fragStream << fragFile.rdbuf();
 			vertexFile.close();
@@ -131,7 +130,7 @@ private:
 	{
 		GLint loc = glGetUniformLocation(program, name);
 		if (loc == -1) {
-			cerr << name << " Uniform not found!" << endl;
+			std::cerr << name << " Uniform not found!" << std::endl;
 		}
 		return loc;
 	}

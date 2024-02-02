@@ -4,11 +4,10 @@
 #include<string>
 #include<time.h>
 
-using namespace std;
 class Timer {
 public:
-	static string getTime() {
-		string s;
+	static std::string getTime() {
+		std::string s;
 		char str[60];
 		time_t t = time(NULL);
 		tm * local_time = localtime(&t);
@@ -22,8 +21,8 @@ public:
 class Log {
 public:
 
-	static void msg(string str) {
-		cout << "Log" << Timer::getTime() << ":" << str << endl;
+	static void msg(std::string str) {
+		std::cout << "Log" << Timer::getTime() << ":" << str << std::endl;
 	}
 
 };

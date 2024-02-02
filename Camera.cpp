@@ -1,16 +1,20 @@
-#include"Camera.h"
-#include<glm/gtc/matrix_transform.hpp>
-using namespace std;
-void Camera::frameMove(float elapsedTime) {
+#include "Camera.h"
+#include <glm/gtc/matrix_transform.hpp>
+
+void Camera::frameMove(float elapsedTime) 
+{
 	angle += angularVelocity * elapsedTime / 150.0f;
 	angularVelocity = angularVelocity / (1.0f + attenuation * elapsedTime);
 	distance += distanceVelocity * elapsedTime / 150.0f;
 	panPosition += panVelocity * elapsedTime / 150.0f;
 	build();
 }
-void Camera::setProjection(float fov, float aspect, float nearPlane, float farPlane) {
+
+void Camera::setProjection(float fov, float aspect, float nearPlane, float farPlane) 
+{
 	projection = glm::perspective(fov, aspect, nearPlane, farPlane);
 }
+
 void Camera::build()
 {
 	view = glm::translate(mat4(1.0f), glm::vec3(-panPosition.x, -panPosition.y, -distance));
@@ -22,7 +26,9 @@ void Camera::build()
 
 	eyePosition = vec3(viewInverse * vec4(0.0f, 0.0f, 0.0f, 1.0f));
 }
-void Camera::updatePosition(vec2 delta) {
+
+void Camera::updatePosition(vec2 delta) 
+{
 	delta.x /= viewportSize.x / 2.0f;
 	delta.y /= viewportSize.y / 2.0f;
 
@@ -39,16 +45,19 @@ void Camera::updatePosition(vec2 delta) {
 	t = inverse * t;
 	panPosition = vec2(t);
 }
-ostream &operator <<(ostream &os, const Camera &camera) {
-	os << camera.distance << endl;
-	os << camera.angle.x << " " << camera.angle.y << endl;
-	os << camera.panPosition.x << " " << camera.panPosition.y << endl;
-	os << camera.angularVelocity.x << " " << camera.angularVelocity.y << endl;
+
+std::ostream &operator <<(std::ostream &os, const Camera &camera) 
+{
+	os << camera.distance << std::endl;
+	os << camera.angle.x << " " << camera.angle.y << std::endl;
+	os << camera.panPosition.x << " " << camera.panPosition.y << std::endl;
+	os << camera.angularVelocity.x << " " << camera.angularVelocity.y << std::endl;
 	return os;
 }
 
 
-istream &operator >>(istream &is, Camera &camera) {
+std::istream &operator >>(std::istream &is, Camera &camera) 
+{
 	is >> camera.distance;
 	is >> camera.angle.x >> camera.angle.y;
 	is >> camera.panPosition.x >> camera.panPosition.y;

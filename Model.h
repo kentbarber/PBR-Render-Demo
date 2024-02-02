@@ -19,12 +19,11 @@
 
 #include <QObject>
 //#include <QOpenGLFunctions>
-#include <QtGui/QOpenGLFunctions_4_1_Core>
-#include <QtOpenGLExtensions/QOpenGLExtensions>
+#include <QOpenGLFunctions_4_1_Core>
+//#include <QtOpenGLExtensions/QOpenGLExtensions>
 using glm::vec2;
 using glm::vec3;
 using glm::vec4;
-using namespace std;
 class Model : public QObject,protected QOpenGLFunctions_4_1_Core
 {
 	Q_OBJECT

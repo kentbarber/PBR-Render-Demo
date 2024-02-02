@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>hellogl2Class</class>
- <widget class="QMainWindow" name="hellogl2Class">
+ <class>OpenGLAppClass</class>
+ <widget class="QMainWindow" name="OpenGLAppClass">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>hellogl2</string>
+   <string>OpenGLApp</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="GLWidget" name="openGLWidget">
@@ -60,7 +60,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>切换不同材质</string>
+     <string>Change Material</string>
     </property>
    </widget>
   </widget>
@@ -93,7 +93,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="hellogl2.qrc"/>
+  <include location="OpenGLApp.qrc"/>
  </resources>
  <connections/>
 </ui>
