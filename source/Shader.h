@@ -1,14 +1,15 @@
 #ifndef SHADER_H
 #define SHADER_H
+
 #include <QObject>
 #include <QOpenGLFunctions_4_1_Core>
-//#include <QtOpenGLExtensions/QOpenGLExtensions>
 #include <glm\gtc\type_ptr.hpp>
 #include <string>
 #include <sstream>
 #include <fstream>
 #include <iostream>
 #include <vector>
+
 class Shader : public QObject, protected QOpenGLFunctions_4_1_Core
 {
 	Q_OBJECT
@@ -16,17 +17,24 @@ private:
 	GLuint program;
 public:
 	Shader() {}
-	~Shader() {
+
+	~Shader() 
+	{
 		glDeleteProgram(program);
 	}
+
 	//init shader using two types of shader files
-	void init(const char * vetex_shader_path, const char * frag_shader_path) {
+	void init(const char * vetex_shader_path, const char * frag_shader_path) 
+	{
 		initializeOpenGLFunctions();
 		program = LoadShaders(vetex_shader_path, frag_shader_path);
 	}
-	GLuint getProgram() {
+
+	GLuint getProgram() 
+	{
 		return program;
 	}
+
 	void use()
 	{
 		glUseProgram(program);
@@ -80,13 +88,16 @@ public:
 		GLuint loc = glGetUniformLocation(program, name);
 		glUniform1i(loc, id);
 	}
+
 private:
-	GLuint LoadShaders(const char * vertex_shader_path, const char * frag_shader_path) {
+	GLuint LoadShaders(const char * vertex_shader_path, const char * frag_shader_path) 
+	{
 		std::string vertexCode;
 		std::string fragCode;
 		std::ifstream vertexFile, fragFile;
 		vertexFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		fragFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
 		try
 		{
 			vertexFile.open(vertex_shader_path);
@@ -103,9 +114,11 @@ private:
 		{
 			std::cerr << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
 		}
+
 		GLuint vertexShaderID, fragShaderID;
 		const char *vetexTemp = vertexCode.c_str();
 		const char *fragTemp = fragCode.c_str();
+
 		//vertex shader
 		vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(vertexShaderID, 1, &vetexTemp, NULL);
@@ -124,16 +137,20 @@ private:
 		checkCompileErrors(program, "PROGRAM");
 		glDeleteShader(vertexShaderID);
 		glDeleteShader(fragShaderID);
+
 		return program;
 	}
+
 	GLint get_uniform_loc(const char * name)
 	{
 		GLint loc = glGetUniformLocation(program, name);
-		if (loc == -1) {
+		if (loc == -1) 
+		{
 			std::cerr << name << " Uniform not found!" << std::endl;
 		}
 		return loc;
 	}
+
 	void checkCompileErrors(unsigned int shader, std::string type)
 	{
 		int success;

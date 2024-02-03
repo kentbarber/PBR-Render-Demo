@@ -114,7 +114,7 @@ void GLWidget::initializeGL()
 	//init OpenGL functions in class TextureLoader
 	textureLoader.init();
 	//init model
-	sphere.init(sphere_model, true, true, true);
+	sphere.Init(sphere_model, true, true, true);
 	Log::msg("load model completed");
 	//init textures
 	//Log::msg("before init textures");
@@ -143,11 +143,15 @@ void GLWidget::paintGL()
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
+
 	mainShader.use();
+
 	glm::mat4 projection = current_camera->getProjectionMatrix();
 	mainShader.bind_mat4("projection", projection);
+
 	glm::mat4 view = current_camera->getViewMatrix();
 	mainShader.bind_mat4("view", view);
+
 	mainShader.bind_mat4("model", model);
 	mainShader.bind_mat4("ModelInverseTranspose", model_inverse_transepose);
 	mainShader.bind_texture("albedoMap", albedoTex, 0, GL_TEXTURE_2D);
@@ -156,22 +160,25 @@ void GLWidget::paintGL()
 	mainShader.bind_texture("roughnessMap", roughnessTex, 3, GL_TEXTURE_2D);
 	mainShader.bind_texture("aoMap", aoTex, 4, GL_TEXTURE_2D);
 	mainShader.bind_vec3("camPos", current_camera->getEyePosition());
-	for (unsigned int i = 0; i < 3; i++) {
+
+	for (unsigned int i = 0; i < 3; i++) 
+	{
 		mainShader.bind_vec3(("lightPositions[" + std::to_string(i) + "]").c_str(), lightPositions[i]);
 		mainShader.bind_vec3(("lightColors[" + std::to_string(i) + "]").c_str(), lightColors[i]);
 	}
-	sphere.render();
-	//cout << "velocity:" << velocity.x << "," << velocity.y << endl;
-	if (abs(velocity.x) > 1e-2 || abs(velocity.y) > 1e-2) {
+
+	sphere.Render();
+
+	if (abs(velocity.x) > 1e-2 || abs(velocity.y) > 1e-2) 
+	{
 		update();
 	}
-	//Log::msg("first render loop");
 }
 
 void GLWidget::resizeGL(int w, int h)
 {
-	//Log::msg("resizeGL function");
-	if (h != 0) {
+	if (h != 0) 
+	{
 		float aspect = float(w) / h;
 		camera.setProjection(CAMERA_FOV * PI / 180.0f, aspect, 0.1f, 100.0f);
 		glViewport(0, 0, w, h);
@@ -182,7 +189,6 @@ void GLWidget::mousePressEvent(QMouseEvent *event)
 {
 	if (event->buttons()==Qt::LeftButton) 
 	{
-		//cout << "pressed:(x,y)=(" << event->x() << "," << event->y() << ")" << endl;
 		current_camera->mousePos = glm::vec2(float(event->x()), float(event->y()));
 		current_camera->attenuation = 4.0f;
 	}
@@ -203,7 +209,6 @@ void GLWidget::mouseMoveEvent(QMouseEvent *event)
 		delta = -delta;
 		current_camera->setAngularVelocity(current_camera->getAngularVelocity() - delta);
 		current_camera->mousePos = new_mouse_pos;
-		//¸üÐÂWidget
 		update();
 	}
 	else if (event->buttons() == Qt::RightButton) 

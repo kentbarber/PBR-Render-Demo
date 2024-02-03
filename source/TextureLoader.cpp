@@ -21,7 +21,6 @@ GLuint TextureLoader::CreateTexture(const char *path, bool srgb)
 	if (data)
 	{
 		GLenum format;
-		//cout << "component = " << nrComponents << endl;
 		if (nrComponents == 1)
 			format = GL_RED;
 		else if (nrComponents == 3)
@@ -30,6 +29,7 @@ GLuint TextureLoader::CreateTexture(const char *path, bool srgb)
 			format = GL_RGBA;
 
 		glBindTexture(GL_TEXTURE_2D, textureID);
+
 		if (srgb) 
 		{
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, width, height, 0, format, GL_UNSIGNED_BYTE, data);//GL_SRGB_ALPHA

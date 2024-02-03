@@ -1,12 +1,15 @@
 #ifndef LOG_H
 #define LOG_H
-#include<iostream>
-#include<string>
-#include<time.h>
+
+#include <iostream>
+#include <string>
+#include <time.h>
 
 class Timer {
 public:
-	static std::string getTime() {
+
+	static std::string getTime() 
+	{
 		std::string s;
 		char str[60];
 		time_t t = time(NULL);
@@ -18,13 +21,14 @@ public:
 		return s;
 	}
 };
-class Log {
-public:
 
-	static void msg(std::string str) {
+class Log 
+{
+public:
+	static void msg(std::string str) 
+	{
 		std::cout << "Log" << Timer::getTime() << ":" << str << std::endl;
 	}
-
 };
 
 #endif

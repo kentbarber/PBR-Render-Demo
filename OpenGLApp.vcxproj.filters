@@ -21,6 +21,9 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
+    <Filter Include="shader">
+      <UniqueIdentifier>{1f419c39-e28e-408c-9c52-372ef101876a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="OpenGLApp.qrc">
@@ -74,5 +77,13 @@
     <ClInclude Include="source\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shader\main.vert">
+      <Filter>shader</Filter>
+    </None>
+    <None Include="shader\main.frag">
+      <Filter>shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

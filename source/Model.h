@@ -1,6 +1,8 @@
 #ifndef MODEL_H
 #define MODEL_H
+
 #define USE_ASSIMP 1
+
 #include <vector>
 #include <string>
 #include <set>
@@ -9,21 +11,23 @@
 #include <sstream>
 #include <glm/vec3.hpp>
 #include <glm/vec2.hpp>
+
 #if USE_ASSIMP
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #endif
+
 #include"Log.h"
 #include <io.h> // _access
 
 #include <QObject>
-//#include <QOpenGLFunctions>
 #include <QOpenGLFunctions_4_1_Core>
-//#include <QtOpenGLExtensions/QOpenGLExtensions>
+
 using glm::vec2;
 using glm::vec3;
 using glm::vec4;
+
 class Model : public QObject,protected QOpenGLFunctions_4_1_Core
 {
 	Q_OBJECT
@@ -40,27 +44,27 @@ public:
 		: _use_normal(use_normal), _use_uv(use_uv), _use_tangent(use_tangent)
 	{
 		initializeOpenGLFunctions();
-		_LoadMeshFromFile(str_path);
-		_BindBuffer();
+		LoadMeshFromFile(str_path);
+		BindBuffer();
 	}
 
 	~Model()
 	{
-		destory();
+		Destory();
 	}
 
-	void init(const std::string& str_path, bool use_normal = true, bool use_uv = true, bool use_tangent = false, bool use_bitangent = false)
+	void Init(const std::string& str_path, bool use_normal = true, bool use_uv = true, bool use_tangent = false, bool use_bitangent = false)
 	{
 		initializeOpenGLFunctions();
 		_use_normal = use_normal;
 		_use_uv = use_uv;
 		_use_tangent = use_tangent;
 		_use_bitangent = use_bitangent;
-		_LoadMeshFromFile(str_path);
-		_BindBuffer();
+		LoadMeshFromFile(str_path);
+		BindBuffer();
 	}
 
-	void destory()
+	void Destory()
 	{
 		glDeleteBuffers(1, &elementBuffer);
 		glDeleteBuffers(1, &vertexBuffer);
@@ -75,7 +79,7 @@ public:
 		Log::msg("Clean up model...");
 	}
 
-	void render()
+	void Render()
 	{
 		GLuint attribute_index = 0;
 
@@ -176,11 +180,13 @@ public:
 			glDisableVertexAttribArray(2);
 	}
 
-	int VertexCount() const {
+	int VertexCount() const 
+	{
 		return _vertices.size();
 	}
 
-	int IndexCount() const {
+	int IndexCount() const 
+	{
 		return _triangles.size();
 	}
 
@@ -207,7 +213,7 @@ public:
 private:
 
 #if USE_ASSIMP
-	void _LoadMeshFromFile(const std::string& str_path)
+	void LoadMeshFromFile(const std::string& str_path)
 	{
 		_triangles.clear();
 		_vertices.clear();
@@ -229,33 +235,41 @@ private:
 			aiProcess_Triangulate |
 			aiProcess_JoinIdenticalVertices |
 			aiProcess_SortByPType;
+
 		if (_use_normal) load_option |= aiProcess_GenSmoothNormals;
 		if (_use_tangent || _use_bitangent) load_option |= aiProcess_CalcTangentSpace;
+
 		const aiScene* scene = importer.ReadFile(path, load_option);
 
-		if (!scene) {
+		if (!scene) 
+		{
 			Log::msg("Can not open model " + str_path + ". Maybe this file type is not supported");
-			return; // TODO
+			return;
 		}
 
 		// get each mesh
 		int nvertices = 0;
 		int ntriangles = 0;
 
-		for (unsigned int i = 0; i < scene->mNumMeshes; i++) {
+		for (unsigned int i = 0; i < scene->mNumMeshes; i++) 
+		{
 			aiMesh* mesh = scene->mMeshes[i];
 			nvertices += mesh->mNumVertices;
 			ntriangles += mesh->mNumFaces;
 		}
 
 		_vertices.reserve(nvertices);
+
 		if (_use_normal) _normals.reserve(nvertices);
 		if (_use_uv) _uv.reserve(nvertices);
 		if (_use_tangent) _tangent.reserve(nvertices);
 		if (_use_bitangent) _bitangent.reserve(nvertices);
+
 		_triangles.resize(ntriangles * 3);	// TODO, *3?
+
 		int idx = 0;
 		int idx2 = 0;
+
 		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
 		{
 			aiMesh* mesh = scene->mMeshes[i];
@@ -306,9 +320,12 @@ private:
 		}
 	}
 #else
-
+	void LoadMeshFromFile(const std::string& str_path)
+	{
+	}
 #endif
-	void _BindBuffer()
+
+	void BindBuffer()
 	{
 
 		GLuint VertexArrayID;
