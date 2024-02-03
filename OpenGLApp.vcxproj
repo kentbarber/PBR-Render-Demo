@@ -61,16 +61,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(SolutionDir)external\AntTweakBar\include;$(SolutionDir)external\assimp-3.1.1\include;$(SolutionDir)external\glew-1.12.0\include;$(SolutionDir)external\glfw-3.1.1.WIN64\include;$(SolutionDir)external\gli\gli-0.6.1.1\gli\external\glm-0.9.7.A;$(SolutionDir)external\gli\gli-0.6.1.1\gli;&amp;(SolutionDir)external\PVRTexTool\Library\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)external\AntTweakBar\lib;$(SolutionDir)external\assimp-3.1.1\lib64;$(SolutionDir)external\glew-1.12.0\lib\Release\x64;$(SolutionDir)external\glfw-3.1.1.WIN64\lib;$(SolutionDir)external\PVRTexTool\Library\Windows_x86_64\Static;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)external\glm-0.9.7.A;$(SolutionDir)external\assimp-3.1.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)external\assimp-3.1.1\lib64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(SolutionDir)external\AntTweakBar\include;$(SolutionDir)external\assimp-3.1.1\include;$(SolutionDir)external\glew-1.12.0\include;$(SolutionDir)external\glfw-3.1.1.WIN64\include;$(SolutionDir)external\gli\gli-0.6.1.1\gli\external\glm-0.9.7.A;$(SolutionDir)external\gli\gli-0.6.1.1\gli;&amp;(SolutionDir)external\PVRTexTool\Library\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)external\AntTweakBar\lib;$(SolutionDir)external\assimp-3.1.1\lib64;$(SolutionDir)external\glew-1.12.0\lib\Release\x64;$(SolutionDir)external\glfw-3.1.1.WIN64\lib;$(SolutionDir)external\PVRTexTool\Library\Windows_x86_64\Static;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)external\glm-0.9.7.A;$(SolutionDir)external\assimp-3.1.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(SolutionDir)external\assimp-3.1.1\lib64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);$(Qt_LIBS_);assimp-vc140-mt.lib;opengl32.lib;glew32.lib;PVRTexLib.lib;glfw3.lib;</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);$(Qt_LIBS_);assimp-vc140-mt.lib;opengl32.lib</AdditionalDependencies>
     </Link>
     <ClCompile>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -80,7 +80,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
-      <AdditionalDependencies>$(CoreLibraryDependencies);assimp-vc140-mt.lib;opengl32.lib;glew32.lib;PVRTexLib.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);assimp-vc140-mt.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>
