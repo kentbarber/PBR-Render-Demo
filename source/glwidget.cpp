@@ -35,6 +35,7 @@ static void qNormalizeAngle(int &angle)
 	while (angle > 360 * 16)
 		angle -= 360 * 16;
 }
+
 void GLWidget::load_preset(std::string path)
 {
 	std::ifstream fs(path);
@@ -43,17 +44,20 @@ void GLWidget::load_preset(std::string path)
 	std::cout << "initialize camera..." << std::endl;
 	fs.close();
 }
+
 void GLWidget::init_textures() {
 	glDeleteTextures(1, &albedoTex);
 	glDeleteTextures(1, &normalTex);
 	glDeleteTextures(1, &aoTex);
 	glDeleteTextures(1, &metallicTex);
 	glDeleteTextures(1, &roughnessTex);
+
 	std::string albedoTex_path = "media/resource/pbr/" + material[curr_material_index] + "/albedo.png";
 	std::string normalTex_path = "media/resource/pbr/" + material[curr_material_index] + "/normal.png";
 	std::string roughnessTex_path = "media/resource/pbr/" + material[curr_material_index] + "/roughness.png";
 	std::string aoTex_path = "media/resource/pbr/" + material[curr_material_index] + "/ao.png";
 	std::string metallicTex_path = "media/resource/pbr/" + material[curr_material_index] + "/metallic.png";
+
 	albedoTex = textureLoader.CreateTexture(albedoTex_path.c_str(), true);
 	normalTex = textureLoader.CreateTexture(normalTex_path.c_str(), false);
 	aoTex = textureLoader.CreateTexture(aoTex_path.c_str(), false);

@@ -15,4 +15,11 @@ MainWindow::MainWindow(QWidget *parent):QMainWindow(parent)
 
 	connect(next, &QPushButton::pressed, glWidget, &GLWidget::nextCurrIndex);
 	connect(pre, &QPushButton::pressed, glWidget, &GLWidget::preCurrIndex);
+
+	connect(ui.actionLoad_Material, &QAction::triggered, this, &MainWindow::loadMaterial);
+}
+
+void MainWindow::loadMaterial()
+{
+
 }
