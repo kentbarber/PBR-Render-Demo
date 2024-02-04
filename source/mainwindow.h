@@ -15,10 +15,8 @@ public:
 	MainWindow(QWidget *parent = Q_NULLPTR);
 
 private slots:
-	void loadMaterial();
 
 signals:
-
 
 private:
 	Ui::OpenGLAppClass ui;
